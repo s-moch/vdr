@@ -38,6 +38,10 @@
 // compatibility and can be used in #if preprocessor statements to handle
 // version dependent code.
 
+// The MainMenuHook Patch's version number:
+#define MAINMENUHOOKSVERSION "1.0.1"
+#define MAINMENUHOOKSVERSNUM 10001  // Version * 10000 + Major * 100 + Minor
+
 #define MAXPRIORITY       99
 #define MINPRIORITY       (-MAXPRIORITY)
 #define LIVEPRIORITY      0                  // priority used when selecting a device for live viewing
