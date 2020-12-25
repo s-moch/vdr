@@ -105,6 +105,8 @@ private:
   char *status;
   int digit;
   bool hasHotkeys;
+  int key_nr;
+  cTimeMs lastActivity;
   bool active;
   void SetActive(bool Active);
   void DisplayHelp(bool Force = false);
