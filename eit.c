@@ -448,12 +448,16 @@ class cTDT : public SI::TDT {
 private:
   static cMutex mutex;
   static time_t lastAdj;
+  static time_t oldTime;
+  static int    oldDiff;
 public:
   cTDT(const u_char *Data);
   };
 
 cMutex cTDT::mutex;
 time_t cTDT::lastAdj = 0;
+time_t cTDT::oldTime = 0;
+int    cTDT::oldDiff = 0;
 
 cTDT::cTDT(const u_char *Data)
 :SI::TDT(Data, false)
@@ -466,6 +470,7 @@ cTDT::cTDT(const u_char *Data)
   int diff = dvbtim - loctim;
   if (abs(diff) > MAX_TIME_DIFF) {
      mutex.Lock();
+     if (oldTime != dvbtim && oldDiff == diff) {
      if (abs(diff) > MAX_ADJ_DIFF) {
         timespec ts = {};
         ts.tv_sec = dvbtim;
@@ -484,6 +489,9 @@ cTDT::cTDT(const u_char *Data)
         else
            esyslog("ERROR while adjusting system time: %m");
         }
+        }
+     oldTime = dvbtim;
+     oldDiff = diff;
      mutex.Unlock();
      }
 }
