@@ -105,6 +105,8 @@ private:
   bool hasHotkeys;
   bool active;
   void SetActive(bool Active);
+  int key_nr;
+  cTimeMs lastActivity;
   void DisplayHelp(bool Force = false);
   void DisplayNoStatus(void);
 protected:
