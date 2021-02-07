@@ -712,7 +712,6 @@ static cStateLockLog StateLockLog;
 // --- cStateLock ------------------------------------------------------------
 
 cStateLock::cStateLock(const char *Name)
-:rwLock(true)
 {
   name = Name;
   threadId = 0;
