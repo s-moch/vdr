@@ -1797,7 +1797,7 @@ bool cSafeFile::Close(void)
 #define USE_FADVISE_READ 0
 #endif
 #ifndef USE_FADVISE_WRITE
-#define USE_FADVISE_WRITE 1
+#define USE_FADVISE_WRITE 0
 #endif
 
 #define WRITE_BUFFER KILOBYTE(800)
