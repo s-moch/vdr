@@ -308,13 +308,11 @@ cDevice *cDevice::GetDevice(const cChannel *Channel, int Priority, bool LiveView
              uint32_t imp = 0;
              imp <<= 1; imp |= (LiveView && NumUsableSlots && !HasInternalCam) ? !ChannelCamRelations.CamDecrypt(Channel->GetChannelID(), CamSlots.Get(j)->MasterSlotNumber()) || ndr : 0; // prefer CAMs that are known to decrypt this channel for live viewing, if we don't need to detach existing receivers
              imp <<= 1; imp |= LiveView ? !device[i]->IsPrimaryDevice() || ndr : 0;                                  // prefer the primary device for live viewing if we don't need to detach existing receivers
-             imp <<= 1; imp |= !device[i]->Receiving() && (device[i] != cTransferControl::ReceiverDevice() || device[i]->IsPrimaryDevice()) || ndr; // use receiving devices if we don't need to detach existing receivers, but avoid primary device in local transfer mode
-             imp <<= 1; imp |= device[i]->Receiving() || OccupiedOtherTransponder;                                   // avoid devices that are receiving
-             imp <<= 5; imp |= GetClippedNumProvidedSystems(5, device[i]) - 1;                                       // avoid cards which support multiple delivery systems
-             imp <<= 8; imp |= device[i]->Priority() - IDLEPRIORITY;                                                 // use the device with the lowest priority (- IDLEPRIORITY to assure that values -100..99 can be used)
-             imp <<= 1; imp |= device[i] == cTransferControl::ReceiverDevice();                                      // avoid the Transfer Mode receiver device
-             imp <<= 8; imp |= ((NumUsableSlots && !HasInternalCam) ? SlotPriority[j] : IDLEPRIORITY) - IDLEPRIORITY;// use the CAM slot with the lowest priority (- IDLEPRIORITY to assure that values -100..99 can be used)
+             imp <<= 1; imp |= !(device[i]->Receiving() && (!device[i]->IsPrimaryDevice() || device[i]->Transferring()) && !ndr); // prefer receiving devices if we don't need to detach existing receivers
              imp <<= 1; imp |= ndr;                                                                                  // avoid devices if we need to detach existing receivers
+             imp <<= 8; imp |= device[i]->Priority() - IDLEPRIORITY;                                                 // use the device with the lowest priority (- IDLEPRIORITY to assure that values -100..99 can be used)
+             imp <<= 8; imp |= ((NumUsableSlots && !HasInternalCam) ? SlotPriority[j] : IDLEPRIORITY) - IDLEPRIORITY;// use the CAM slot with the lowest priority (- IDLEPRIORITY to assure that values -100..99 can be used)
+             imp <<= 5; imp |= GetClippedNumProvidedSystems(5, device[i]) - 1;                                       // avoid cards which support multiple delivery systems
              imp <<= 1; imp |= (NumUsableSlots || InternalCamNeeded) ? 0 : device[i]->HasCi();                       // avoid cards with Common Interface for FTA channels
              imp <<= 1; imp |= device[i]->AvoidRecording();                                                          // avoid SD full featured cards
              imp <<= 1; imp |= (NumUsableSlots && !HasInternalCam) ? !ChannelCamRelations.CamDecrypt(Channel->GetChannelID(), CamSlots.Get(j)->MasterSlotNumber()) : 0; // prefer CAMs that are known to decrypt this channel
