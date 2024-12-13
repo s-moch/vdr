@@ -867,14 +867,32 @@ msgstr "Fehler beim Ändern des Ordners bzw. Namens!"
 msgid "Recording info"
 msgstr "Aufzeichnung"
 
+msgid "Button$RECORDINGS"
+msgstr "AUFNAHMEN"
+
+msgid "Button$Back"
+msgstr "Zurück"
+
 msgid "Button$Play"
 msgstr "Wiedergabe"
 
 msgid "Button$Rewind"
 msgstr "Anfang"
 
+msgid "Deleted Recordings"
+msgstr "Gelöschte Aufnahmen"
+
 msgid "Recordings"
 msgstr "Aufzeichnungen"
+
+msgid "Button$Undelete"
+msgstr "Wiederherstellen"
+
+msgid "Button$Destroy"
+msgstr "Löschen"
+
+msgid "Button$UNDELETE"
+msgstr ""
 
 msgid "Commands"
 msgstr "Befehle"
@@ -887,6 +905,15 @@ msgstr "Aufzeichnung wird bearbeitet - trotzdem löschen?"
 
 msgid "Error while deleting recording!"
 msgstr "Fehler beim Löschen der Aufzeichnung!"
+
+msgid "Restore recording?"
+msgstr "Aufnahme wiederherstellen?"
+
+msgid "Error while restoring recording!"
+msgstr "Fehler bei der Wiederherstellung der Aufnahme!"
+
+msgid "Error while removing recording!"
+msgstr "Fehler beim Löschen der Aufnahme!"
 
 msgid "Recording commands"
 msgstr "Befehle für Aufzeichnungen"
@@ -1004,6 +1031,12 @@ msgstr "Standard Sortierreihenfolge für Aufnahmen"
 
 msgid "Setup.OSD$Sorting direction for recordings"
 msgstr "Sortierreihenfolge für Aufnahmen"
+
+msgid "Setup.OSD$Red button UNDELETE timeout (s)"
+msgstr ""
+
+msgid "  Setup.OSD$Displayed first"
+msgstr "  Wird zuerst angezeigt"
 
 msgid "Setup.OSD$Number keys for characters"
 msgstr "Nummerntasten für Zeichen"
@@ -1511,9 +1544,11 @@ msgstr "Schnitt gestartet"
 msgid "Editing process already active!"
 msgstr "Schnitt bereits aktiv!"
 
+#, c++-format
 msgid "FileNameChars$ abcdefghijklmnopqrstuvwxyz0123456789-.,#~\\^$[]|()*+?{}/:%@&"
 msgstr " aäbcdefghijklmnoöpqrsßtuüvwxyz0123456789-.,#~\\^$[]|()*+?{}/:%@&"
 
+#, c++-format
 msgid "CharMap$ 0\t-.,1#~\\^$[]|()*+?{}/:%@&\tabc2\tdef3\tghi4\tjkl5\tmno6\tpqrs7\ttuv8\twxyz9"
 msgstr " 0\t-.,1#~\\^$[]|()*+?{}/:%@&\tabcä2\tdef3\tghi4\tjkl5\tmnoö6\tpqrsß7\ttuvü8\twxyz9"
 

@@ -38,6 +38,10 @@
 // compatibility and can be used in #if preprocessor statements to handle
 // version dependent code.
 
+#ifndef USE_UNDELETE
+#define USE_UNDELETE      1
+#endif /* Undelete */
+
 #define MAXPRIORITY       99
 #define MINPRIORITY       (-MAXPRIORITY)
 #define LIVEPRIORITY      0                  // priority used when selecting a device for live viewing
@@ -326,6 +330,10 @@ public:
   int RecSortingDirection;
   int NumberKeysForChars;
   int ColorKey0, ColorKey1, ColorKey2, ColorKey3;
+#ifdef USE_UNDELETE
+  int UndeleteTimeOut;
+  int UndeleteFirst;
+#endif /* Undelete */
   int VideoDisplayFormat;
   int VideoFormat;
   int UpdateChannels;
