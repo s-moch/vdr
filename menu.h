@@ -213,6 +213,12 @@ private:
   int level;
   cStateKey recordingsStateKey;
   int helpKeys;
+#ifdef USE_UNDELETE
+  time_t tNow;
+  static bool isDelRecMenu;
+  bool delRecMenu;
+  bool deletedRec;
+#endif /* Undelete */
   const cRecordingFilter *filter;
   static cString path;
   static cString fileName;
@@ -222,16 +228,27 @@ private:
   eOSState Play(void);
   eOSState Rewind(void);
   eOSState Delete(void);
+#ifdef USE_UNDELETE
+  eOSState Undelete(void);
+  eOSState Erase(void);
+#endif /* Undelete */
   eOSState Info(void);
   eOSState Sort(void);
   eOSState Commands(eKeys Key = kNone);
 protected:
   cString DirectoryName(void);
 public:
+#ifdef USE_UNDELETE
+  cMenuRecordings(const char *Base = NULL, int Level = 0, bool OpenSubMenus = false, const cRecordingFilter *Filter = NULL, bool DelRecMenu = false);
+#else /* Undelete */
   cMenuRecordings(const char *Base = NULL, int Level = 0, bool OpenSubMenus = false, const cRecordingFilter *Filter = NULL);
+#endif /* Undelete */
   ~cMenuRecordings();
   virtual eOSState ProcessKey(eKeys Key) override;
   static void SetRecording(const char *FileName);
+#ifdef USE_UNDELETE
+  static bool IsDelRecMenu(void) { return isDelRecMenu; }
+#endif /* Undelete */
   };
 
 class cRecordControl {
