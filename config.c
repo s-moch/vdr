@@ -499,6 +499,10 @@ cSetup::cSetup(void)
   ChannelsWrap = 0;
   ShowChannelNamesWithSource = 0;
   EmergencyExit = 1;
+#ifdef USE_UNDELETE
+  UndeleteTimeOut = 0;
+  UndeleteFirst = 1;
+#endif /* Undelete */
 }
 
 cSetup& cSetup::operator= (const cSetup &s)
@@ -730,6 +734,10 @@ bool cSetup::Parse(const char *Name, const char *Value)
   else if (!strcasecmp(Name, "ShowChannelNamesWithSource")) ShowChannelNamesWithSource = atoi(Value);
   else if (!strcasecmp(Name, "EmergencyExit"))       EmergencyExit      = atoi(Value);
   else if (!strcasecmp(Name, "LastReplayed"))        cReplayControl::SetRecording(Value);
+#ifdef USE_UNDELETE
+  else if (!strcasecmp(Name, "UndeleteTimeOut"))     UndeleteTimeOut    = atoi(Value);
+  else if (!strcasecmp(Name, "UndeleteFirst"))       UndeleteFirst      = atoi(Value);
+#endif /* Undelete */
   else
      return false;
   return true;
@@ -864,6 +872,10 @@ bool cSetup::Save(void)
   Store("ShowChannelNamesWithSource", ShowChannelNamesWithSource);
   Store("EmergencyExit",      EmergencyExit);
   Store("LastReplayed",       cReplayControl::LastReplayed());
+#ifdef USE_UNDELETE
+  Store("UndeleteTimeOut",    UndeleteTimeOut);
+  Store("UndeleteFirst",      UndeleteFirst);
+#endif /* Undelete */
 
   Sort();
 
