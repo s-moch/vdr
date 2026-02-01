@@ -3134,13 +3134,18 @@ cMenuRecordings::~cMenuRecordings()
 void cMenuRecordings::SetHelpKeys(void)
 {
   cMenuRecordingItem *ri = (cMenuRecordingItem *)Get(Current());
+  bool showDelRec;
   int NewHelpKeys = 0;
+  {
+    LOCK_DELETEDRECORDINGS_READ;
+    showDelRec = DeletedRecordings->Count() && (toggleDelRec || !RecordingCommands.Count());
+  }
   if (ri) {
      if (ri->IsDirectory())
-        NewHelpKeys = toggleDelRec ? 1 : 2;
+        NewHelpKeys = showDelRec ? 1 : 2;
      else if (delRecMenu)
         NewHelpKeys = 3;
-     else if (toggleDelRec)
+     else if (showDelRec)
         NewHelpKeys = 4;
      else
         NewHelpKeys = 5;
@@ -3151,10 +3156,10 @@ void cMenuRecordings::SetHelpKeys(void)
      switch (NewHelpKeys) {
        case 0: SetHelp(NULL); break;
        case 1: SetHelp(delRecMenu ? tr("Button$Recordings") : tr("Button$Deleted recordings"), NULL, NULL, delRecMenu ? NULL : tr("Button$Edit")); break;
-       case 2: SetHelp(delRecMenu ? tr("Button$Recordings") : tr("Button$Open"), NULL, NULL, delRecMenu ? NULL : tr("Button$Edit")); break;
+       case 2: SetHelp(delRecMenu ? tr("Button$Recordings") : NULL, NULL, NULL, delRecMenu ? NULL : tr("Button$Edit")); break;
        case 3: SetHelp(tr("Button$Recordings"), tr("Button$Restore"), tr("Button$Permanently delete"), tr("Button$Info")); break;
        case 4: SetHelp(tr("Button$Deleted recordings"), tr("Button$Rewind"), tr("Button$Delete"), tr("Button$Info")); break;
-       case 5: SetHelp(RecordingCommands.Count() ? tr("Button$Commands") : tr("Button$Play"), tr("Button$Rewind"), tr("Button$Delete"), tr("Button$Info")); break;
+       case 5: SetHelp(RecordingCommands.Count() ? tr("Button$Commands") : NULL, tr("Button$Rewind"), tr("Button$Delete"), tr("Button$Info")); break;
        case 6: SetHelp(delRecMenu ? tr("Button$Recordings") : tr("Button$Deleted recordings")); break;
        default: ;
        }
@@ -3535,10 +3540,10 @@ eOSState cMenuRecordings::ProcessKey(eKeys Key)
                         toggleDelRec = time(NULL);
                      switch (helpKeys) {
                        case 1: return delRecMenu ? osRecsOpen : osRecsDel;
-                       case 2: return delRecMenu ? osRecsOpen : Play();
+                       case 2: return delRecMenu ? osRecsOpen : osContinue;
                        case 3: return osRecsOpen;
                        case 4: return osRecsDel;
-                       case 5: return RecordingCommands.Count() ? Commands() : Play();
+                       case 5: return RecordingCommands.Count() ? Commands() : osContinue;
                        case 6: return delRecMenu ? osRecsOpen : osRecsDel;
                        default: ;
                        }
