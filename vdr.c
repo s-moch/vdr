@@ -1273,7 +1273,7 @@ int main(int argc, char *argv[])
             { DELETE_MENU;\
             if (Control)\
                Control->Hide();\
-            Menu = new cMenuMain(function);\
+            Menu = new cMenuMain(function, true);\
             key = kNone; } // nobody else needs to see this key
           case kSchedule:   DirectMainFunction(osSchedule); break;
           case kChannels:   DirectMainFunction(osChannels); break;
