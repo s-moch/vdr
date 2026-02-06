@@ -4849,7 +4849,7 @@ bool cMenuMain::Update(bool Force)
     bool HasDeletedRecordings = DeletedRecordings->Count();
     if (HasDeletedRecordings && !deletedRecordingsItem) {
        // TRANSLATORS: note the leading blank!
-       Add(deletedRecordingsItem = new cOsdItem(tr(" Deleted recordings"), osRecsDel));
+       Add(deletedRecordingsItem = new cOsdItem(hk(tr(" Deleted recordings")), osRecsDel));
        result = true;
        }
     else if (deletedRecordingsItem && !HasDeletedRecordings) {
@@ -4870,7 +4870,7 @@ bool cMenuMain::Update(bool Force)
      // Replay control:
      if (replaying && !stopReplayItem)
         // TRANSLATORS: note the leading blank!
-        Add(stopReplayItem = new cOsdItem(tr(" Stop replaying"), osStopReplay));
+        Add(stopReplayItem = new cOsdItem(hk(tr(" Stop replaying")), osStopReplay));
      else if (stopReplayItem && !replaying) {
         Del(stopReplayItem->Index());
         stopReplayItem = NULL;
@@ -4884,7 +4884,7 @@ bool cMenuMain::Update(bool Force)
   bool EditingActive = RecordingsHandler.Active();
   if (EditingActive && !cancelEditingItem) {
      // TRANSLATORS: note the leading blank!
-     Add(cancelEditingItem = new cOsdItem(tr(" Cancel editing"), osCancelEdit));
+     Add(cancelEditingItem = new cOsdItem(hk(tr(" Cancel editing")), osCancelEdit));
      result = true;
      }
   else if (cancelEditingItem && !EditingActive) {
