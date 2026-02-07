@@ -1508,7 +1508,7 @@ msgstr " Aufzeichnung beenden "
 
 #. TRANSLATORS: note the leading blank!
 msgid " Deleted recordings"
-msgstr " Gelöschte Aufzeichnungen"
+msgstr " Gelöschte Aufzeichn."
 
 #. TRANSLATORS: note the leading blank!
 msgid " Stop replaying"
